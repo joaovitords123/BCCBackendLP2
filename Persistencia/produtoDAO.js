@@ -81,7 +81,7 @@ export default class ProdutoDAO {
         let parametros = [];
         if (isNaN(parseInt(termo))) {
             sql = `SELECT * FROM produto p
-                   INNER JOIN categoria c ON p.fk_codigo_cat = c.codigo
+                   INNER JOIN categoria c ON p.fk_codigo_cat = c.prod_codigo
                    WHERE prod_descricao LIKE ?`;
             parametros = ['%' + termo + '%'];
         }
@@ -113,7 +113,7 @@ export default class ProdutoDAO {
     async excluir(produto) {
         if (produto instanceof Produto) {
             const conexao = await conectar();
-            const sql = `DELETE FROM produto WHERE codigo = ?`;
+            const sql = `DELETE FROM produto WHERE prod_codigo = ?`;
             let parametros = [
                 produto.codigo
             ]; //dados do produto
